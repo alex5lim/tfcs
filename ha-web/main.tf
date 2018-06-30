@@ -26,17 +26,19 @@ resource "aws_elb" "web-elb" {
       interval = 30
     }
 }
+data "template_file" "user-data" {
+  template = "${file("user-data.sh")}"
+
+  vars {
+    server_port = "${var.server_port}"
+  }
+}
 
 resource "aws_launch_configuration" "my-ha-web" {
     image_id        = "ami-6e2a1e12" #Ubuntu 16.04 LTS
     instance_type   = "t2.micro"
     security_groups = ["${aws_security_group.my-web-asg.id}"]
-
-    user_data = <<-EOF
-                #!/bin/bash
-                echo "Hello, World!" > index.html
-                nohup busybox httpd -f -p "${var.server_port}" &
-                EOF
+    user_data       = "${data.template_file.user-data.rendered}"
 
     lifecycle {
       create_before_destroy = true
