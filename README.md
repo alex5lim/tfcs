@@ -24,5 +24,5 @@ You will be asked to key in the name of your AWS EC2 SSH Key when you do `terraf
 ### Accessing WordPress
 `terraform apply` will give output of `elb_dns_name`. Use your browser to connect to the DNS name of `elb_dns_name` to access WordPress. The get the credentials to login to WordPress, you need to SSH to the EC2 instance and get it from `bitnami_credentials` file.
 
-#### Acccessing Monitoring Server
-`terraform apply` will also give output of `web_server_dns_name`. Use browser to access the URL at port 2812 to get access to the monitoring of WordPress services. 
+### Acccessing Monitoring Server
+`terraform apply` will also give output of `web_server_dns_name`. Use browser to access the URL at port 2812 to get access to the monitoring of WordPress services.
