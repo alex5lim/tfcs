@@ -110,7 +110,6 @@ data "template_file" "user-data" {
 
 variable "ssh_key_name" {
   description = "Name of SSH key for EC2 instance"
-  default = "MyShinyEC2Key"
 }
 variable "server_port" {
   description = "The port that web server listen on"
