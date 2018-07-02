@@ -27,6 +27,7 @@ resource "aws_security_group" "web-elb-asg" {
 resource "aws_security_group" "web-asg" {
     name = "web-asg"
 
+    # allow web
     ingress {
       from_port   = "${var.server_port}"
       to_port     = "${var.server_port}"
@@ -34,10 +35,26 @@ resource "aws_security_group" "web-asg" {
       cidr_blocks = ["0.0.0.0/0"]
     }
 
+    # allow ssh
     ingress {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    # allow monit
+    ingress {
+      from_port   = 2812
+      to_port     = 2812
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    egress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
       cidr_blocks = ["0.0.0.0/0"]
     }
 }
@@ -52,7 +69,7 @@ resource "aws_instance" "web-server" {
   key_name = "MyShinyEC2Key"
 
   # installation script
-  # user_data = "${data.template_file.user-data.rendered}"
+  user_data = "${data.template_file.user-data.rendered}"
   tags {
     Name = "web-server"
   }
@@ -91,6 +108,10 @@ data "template_file" "user-data" {
   }
 }
 
+variable "ssh_key_name" {
+  description = "Name of SSH key for EC2 instance"
+  default = "MyShinyEC2Key"
+}
 variable "server_port" {
   description = "The port that web server listen on"
   default = 80
