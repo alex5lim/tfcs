@@ -9,7 +9,7 @@ Monit for monitoring purpose. By default, the script will use AWS Singapore regi
 * AWS SSH key pair
 
 ### How to use the script
-First, you need to install Terraform on your PC, see [this guide] (https://www.terraform.io/intro/getting-started/install.html). Clone this repo and go to `wp-elb` directory and run following commands:
+First, you need to install Terraform on your PC, see [this guide](https://www.terraform.io/intro/getting-started/install.html). Clone this repo and go to `wp-elb` directory and run following commands:
 ```bash
 export AWS_ACCESS_KEY_ID=my_access_key_id
 export AWS_SECRET_ACCESS_KEY=my_secret_access_key_id
