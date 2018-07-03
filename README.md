@@ -2,7 +2,7 @@
 
 ## Using Terraform to deploy Wordpress and Monit
 This Terraform code is used to deploy a WordPress server on AWS using Bitnami AMI and enable
-Monit for monitoring purpose.
+Monit for monitoring purpose. By default, the script will use AWS Singapore region and default VPC subnet.
 
 ### Prerequisites
 * AWS AKI/SAK keys with AdministratorAccess privilege
